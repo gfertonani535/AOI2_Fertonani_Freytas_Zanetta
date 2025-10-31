@@ -1,0 +1,127 @@
+// // using Microsoft.AspNetCore.Authorization;
+// // using Microsoft.AspNetCore.Mvc;
+// // using GestionContactos.Models;
+// // using GestionContactos.Services;
+
+// // namespace EVS_1.Controllers
+// // {
+// //     [ApiController]
+// //     [Route("api/[controller]")]
+// //     [Authorize] 
+// //     public class ContactosController : ControllerBase
+// //     {
+// //        private readonly Db_A358b2_Pam3Context _context;
+
+// // public ContactosController(Db_A358b2_Pam3Context context)
+// // {
+// //     _context = context;
+// // }
+
+// // [HttpGet]
+// // public IActionResult GetAllContactos()
+// // {
+// //     return Ok(_context.Contacto.ToList());
+// // }
+
+// // [HttpGet("{id}")]
+// // public IActionResult GetContactoById(int id)
+// // {
+// //     var contacto = _context.Contacto.Find(id);
+// //     if (contacto == null)
+// //         return NotFound();
+// //     return Ok(contacto);
+// // }
+
+// // [Authorize(Roles = "Admin")]
+// // [HttpPost("add")]
+// // public IActionResult AddContacto([FromBody] Contacto contacto)
+// // {
+// //     _context.Contacto.Add(contacto);
+// //     _context.SaveChanges();
+// //     return CreatedAtAction(nameof(GetContactoById), new { id = contacto.Id }, contacto);
+// // }
+
+// // [Authorize(Roles = "Admin")]
+// // [HttpPut("edit/{id}")]
+// // public IActionResult EditContacto(int id, [FromBody] Contacto contacto)
+// // {
+// //     if (id != contacto.Id) return BadRequest();
+
+// //     if (!_context.Contacto.Any(c => c.Id == id))
+// //         return NotFound();
+
+// //     _context.Entry(contacto).State = EntityState.Modified;
+// //     _context.SaveChanges();
+
+// //     return Ok(new { message = "Contacto actualizado correctamente" });
+// // }
+
+// //     }
+// // }
+// using GestionContactos.Models;
+// using GestionContactos.Services;
+// using Microsoft.AspNetCore.Authorization;
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.EntityFrameworkCore;
+// using GestionContactos.Models;
+
+// namespace EVS_1.Controllers
+// {
+//     [ApiController]
+//     [Route("api/[controller]")]
+//     [Authorize]
+//     public class ContactosController : ControllerBase
+//     {
+//         private readonly DbA358b2Pam3Context _context;
+
+//         public ContactosController(DbA358b2Pam3Context context)
+//         {
+//             _context = context;
+//         }
+
+//         [Authorize]
+//         [HttpGet]
+//         public async Task<IActionResult> GetAllContactos()
+//         {
+//             var contactos = await _context.Contacto.ToListAsync();
+//             return Ok(contactos);
+//         }
+
+//         [HttpGet("{id}")]
+//         public async Task<IActionResult> GetContactoById(int id)
+//         {
+//             var contacto = await _context.Contacto.FindAsync(id);
+//             if (contacto == null)
+//                 return NotFound();
+
+//             return Ok(contacto);
+//         }
+
+//         [Authorize(Roles = "Admin")]
+//         [HttpPost("add")]
+//         public async Task<IActionResult> AddContacto([FromBody] Contacto contacto)
+//         {
+//             _context.Contacto.Add(contacto);
+//             await _context.SaveChangesAsync();
+
+//             return CreatedAtAction(nameof(GetContactoById), new { id = contacto.Id }, contacto);
+//         }
+
+//         [Authorize(Roles = "Admin")]
+//         [HttpPut("edit/{id}")]
+//         public async Task<IActionResult> EditContacto(int id, [FromBody] Contacto contacto)
+//         {
+//             if (id != contacto.Id)
+//                 return BadRequest();
+
+//             if (!await _context.Contacto.AnyAsync(c => c.Id == id))
+//                 return NotFound();
+
+//             _context.Entry(contacto).State = EntityState.Modified;
+//             await _context.SaveChangesAsync();
+
+//             return Ok(new { message = "Contacto actualizado correctamente" });
+//         }
+//     }
+// }
+
